@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
               <meta
                 key="deScription"
                 property="og:deScription"
-                content="Matrimonial Admin"
+                content="P2P"
               />
               <meta
                 property="og:image"
