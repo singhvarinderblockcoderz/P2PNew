@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       console.log(token, "token to send to api");
       var config = {
         method: "post",
-        url: "http://192.168.1.7:3001/api/v1/member/getuserstats",
+        url: "http://3.109.75.65:4001/api/v1/member/getuserstats",
         headers: {
           Authorization: `Bearer ${token} `,
         },
