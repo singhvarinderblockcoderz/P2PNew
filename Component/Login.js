@@ -1,13 +1,17 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CustomizeConnectButton } from "../Component/ui/ConnectButton";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function login() {
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  // const { disconnect } = useDisconnect();
   const { address } = useAccount();
   console.log({ address }, "to get the address");
 
@@ -18,21 +22,44 @@ export default function login() {
       setShow(true);
       formSubmitHandler();
     }
-
     if (!address) {
       setShow(false);
     }
   }, [address]);
 
+  // const disconnectWallet = async () => {
+  //   disconnect();
+  //   // refreshState();
+  // };
+
   async function walletCheck(data) {
     try {
       let res = await axios.post("/api/login/walletCheck", data);
       const response = res.data;
-      console.log(response, "to get the response from api to send address");
+      console.log(
+        response.data,
+        "to get the response from api to send address"
+      );
+      const tokenData = response.data.data;
+      localStorage.setItem("token", tokenData);
+      if (tokenData) {
+        setShow(false);
+        setShow2(true);
+      }
+      if (!tokenData) {
+        setShow(true);
+        setShow2(false);
+      }
+
       setShow(true);
     } catch (err) {
       console.log(err);
       setShow(false);
+      setShow2(false);
+      // toast.error("User Already exist");
+      // setTimeout(() => {
+      //   disconnectWallet();
+      // }, 1000);
     }
   }
 
@@ -46,9 +73,18 @@ export default function login() {
     walletCheck(data);
   }
 
+  // function backFn(e) {
+  //   e.preventDefault();
+
+  //   setShow2(false);
+  //   setShow(false);
+  //   window.location.reload();
+  // }
+
   return (
     <div>
       <section class="p2p-hero">
+        <ToastContainer />
         <div class="p2p-herobox">
           <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -122,6 +158,38 @@ export default function login() {
                         Create Account
                       </button>
                     </a>
+                  </div>
+                </div>
+              </Modal>
+
+              <Modal
+                show={show2}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
+                <div className="modal-content" id="connect-content">
+                  <div className="modal-body" id="connect-body">
+                    <div className="connect-icon">
+                      <img src="/tron.png" alt="" />
+                    </div>
+                    <p className="p2p-email" style={{ color: "white" }}>
+                      {address}
+                    </p>
+                    <h6 style={{ textAlign: "center" }}>Hi There !</h6>
+                    <div className="create-some">
+                      <p className="some-text">This wallet is Already exist</p>
+                    </div>
+                  </div>
+                  <div className="modal-footer" id="connect-footer">
+                    <Link href="/dashboard">
+                      <button
+                        type="button"
+                        // onClick={backFn}
+                        className="btn  connect-wallet"
+                      >
+                        LogIn
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </Modal>

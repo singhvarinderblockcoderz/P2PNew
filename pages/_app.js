@@ -10,6 +10,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "@wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import $ from "jquery";
 const { chains, provider } = configureChains(
   [polygonMumbai],
   [publicProvider()]
@@ -31,11 +32,7 @@ function MyApp({ Component, pageProps }) {
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains} modalSize="compact">
             <Head>
-              <meta
-                key="deScription"
-                property="og:deScription"
-                content="P2P"
-              />
+              <meta key="deScription" property="og:deScription" content="P2P" />
               <meta
                 property="og:image"
                 key="image"
@@ -52,6 +49,7 @@ function MyApp({ Component, pageProps }) {
               integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
               crossOrigin="anonymous"
             ></Script>
+
             <link
               rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -86,11 +84,32 @@ function MyApp({ Component, pageProps }) {
               integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
               crossorigin="anonymous"
             ></Script>
-            <Script
+
+            <link
+              rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+              integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+              crossorigin="anonymous"
+            />
+
+            {/* <Script
               src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
               integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
               crossorigin="anonymous"
+            ></Script> */}
+
+            <Script src="https://code.jquery.com/jquery-3.6.4.js"></Script>
+
+            <Script
+              src="https://code.jquery.com/jquery-3.6.3.min.js"
+              integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+              crossorigin="anonymous"
             ></Script>
+            <Script src="js/owl.carousel.min.js"></Script>
+            <Script src="js/script.js"></Script>
+            <Script src="js/bootstrap.bundle.min.js"></Script>
+
+            <Script src="js/jquery-3.6.0.min.js"></Script>
           </RainbowKitProvider>
         </WagmiConfig>
       </SSRProvider>

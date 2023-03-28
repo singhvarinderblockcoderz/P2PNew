@@ -40,11 +40,21 @@ export default function TabsLink() {
     async onSuccess(data) {
       console.log("Success", data);
       let tx = await data.wait();
-      console.log(tx, "to get the transactino status");
+      console.log(tx, tx.transactionHash, "to get the transactino status");
+      var hash = tx.transactionHash
       if (tx.status == 1) {
+       
         router.push("/awesome");
       }
       if (tx.status == 0) {
+        let res = await axios.post("/api/register", {
+          faceImpression: getContentKey,
+          address: getAddress,
+          referral: getReferral,
+          hash: hash,
+        });
+        const response = res.data;
+        console.log(response, "to get response from api for registration");
         router.push("/awesome1");
       }
     },

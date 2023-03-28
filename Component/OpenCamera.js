@@ -104,7 +104,7 @@ export default function openCamera() {
   }
 
   async function getImageData() {
-    setOpen(true)
+    setOpen(true);
     try {
       const params = {
         SourceImage: {
@@ -176,9 +176,7 @@ export default function openCamera() {
           `Match found with ${content.Key}. Similarity score: ${data.FaceMatches[0].Similarity}`
         );
         return 1;
-      } 
-      
-      else {
+      } else {
         console.log("no match found");
         return 0;
       }
@@ -214,8 +212,6 @@ export default function openCamera() {
                 audio={false}
                 className="imageSetting"
                 mirrored={true}
-                // height={320}
-                // width={640}
               />
               <div className="captureDiv">
                 <button
@@ -249,9 +245,6 @@ export default function openCamera() {
                 >
                   Submit
                 </button>
-                {/* <img src="/close.png" onClick={closeImage}></img> */}
-
-                {/* <img src="/siglecheck.png" onClick={getImageData}></img> */}
               </div>
             </div>
           ) : (

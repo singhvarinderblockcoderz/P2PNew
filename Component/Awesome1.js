@@ -16,7 +16,7 @@ export default function getStarted() {
               With your help, you've just supported others to fulfilling their
               dreams.
             </p> */}
-            <Link href="tabsLink">
+            <Link href="dashboard">
               <button class="go">Go to Dashboard</button>
             </Link>
           </div>
